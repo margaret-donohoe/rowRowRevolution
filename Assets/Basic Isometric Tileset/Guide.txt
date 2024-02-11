@@ -1,0 +1,24 @@
+If you are new to using isometric tiles, here is a quick guide to get you started:
+
+Start by creating a tilemap inside your project. Right-click in your hierarchy (or go to the Game Object menu) and choose 2D Object > Tilemap > Isometric Z as Y. Unity will create a grid and a tilemap child object. I recommend renaming the tilemap, as you may end up with several of them later on. 
+
+Go to Edit > Project Settings > Graphics. Your Transparency Sort Mode should be 'Custom Axis'. Set your Transparency Sort Axis to 
+
+X = 0
+Y = 1
+Z = -0.26
+
+
+Then go to Window > 2D > Tile Palette. Here, you can select any palettes that exists within your project or create a new palette. If you choose to create a new palette, you should choose "Isometric Z as Y" grid, have your cell size be X = 1, Y = 0.5, Z = 1 and set your sort mode once more to Custom Axis, using the same numbers for the Sort Axis as you did above for the Transparency Sort Axis (0, 1, -.26). Click 'Create'. 
+
+Your Active Tilemap should be the one you created in the first step. Drag and drop the sprites you wish to use into the palette. You will be prompted to choose a folder. Unity will convert your sprites into tiles and use this folder to save the new format. 
+
+Once your palette is populated, it's possible that the size of the tiles does not match the size of the grid. To fix this, select your sprites, go to the Inspector and change the pixels per unit to match the size of your sprites (the Ultrasonic Tileset uses 128 pixels per unit).
+
+If any tiles are off-center or at the wrong height, you will need to select 'Sprite Editor' in the Inspector and shift the pivot point of the tile. 
+
+You can play with both the pivot point and the pixels per unit to achieve different looks for your tilemap. 
+
+
+
+If you have trouble with the rendering order (tiles that should be further back are overlapping the ones in the front), double-check the Graphics Settings to make sure the numbers are correct. You can also try going to the tilemap inspector and changing the tilemap renderer mode from 'chunk' to 'individual'. 
