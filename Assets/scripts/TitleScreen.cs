@@ -10,9 +10,11 @@ public class TitleScreen : MonoBehaviour
     public Button one;
     public Button two;
     public TextMeshProUGUI prompt;
+    
 
     private int numPlayers = 0;
 
+    
     void Start()
     {
         prompt.alpha = 0;
