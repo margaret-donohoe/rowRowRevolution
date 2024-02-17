@@ -15,9 +15,15 @@ EditorBuildSettings:
     path: Assets/Scenes/choose1.unity
     guid: 235f3c41b49bd4e94901fb3b4068ce56
   - enabled: 1
-    path: Assets/Scenes/choose2.unity
-    guid: cde937375f37048aab0e34bce92d4ff5
-  - enabled: 1
     path: Assets/Scenes/levelOne.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/choose2a.unity
+    guid: cde937375f37048aab0e34bce92d4ff5
+  - enabled: 1
+    path: Assets/Scenes/choose2b.unity
+    guid: 17b1e60f2052743e49eb0a12b1248402
+  - enabled: 1
+    path: Assets/Scenes/LEVELTWO.unity
+    guid: 3757a583e3fa144c790489c6e9187f35
   m_configObjects: {}

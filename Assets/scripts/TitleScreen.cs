@@ -35,7 +35,7 @@ public class TitleScreen : MonoBehaviour
         }
         else if (numPlayers == 2)
         {
-            SceneManager.LoadScene("choose2"); //scene where two players can choose their boats
+            SceneManager.LoadScene("choose2a"); //scene where two players can choose their boats
         }
         else
         {
