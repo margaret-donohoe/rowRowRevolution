@@ -25,7 +25,7 @@ public class PInput2 : MonoBehaviour
         camera = gameObject.transform.GetChild(0).gameObject;
         Player = gameObject;
         PathNode = pointParent.GetComponentsInChildren<Transform>();
-
+        Debug.Log(PathNode);
         CheckNode();
     }
 
@@ -43,9 +43,9 @@ public class PInput2 : MonoBehaviour
         camera.transform.position = new Vector3(Player.transform.position.x + 4, Player.transform.position.y, -10f);
         Timer += Time.deltaTime * MoveSpeed;
 
+
         if (Player.transform.position != CurrentPositionHolder)
         {
-
             Player.transform.position = Vector3.Lerp(startPosition, CurrentPositionHolder, Timer);
         }
         else

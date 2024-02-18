@@ -34,7 +34,7 @@ public class twoPlayerManager : MonoBehaviour
         }
         else
         {
-            print("Please connect a Controller!!!");
+            //print("Please connect a Controller!!!");
         }
     }
 
