@@ -58,4 +58,6 @@ public class PInput2 : MonoBehaviour
             }
         }
     }
+
+    
 }
