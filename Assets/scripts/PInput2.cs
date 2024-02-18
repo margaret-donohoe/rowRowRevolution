@@ -25,7 +25,7 @@ public class PInput2 : MonoBehaviour
         camera = gameObject.transform.GetChild(0).gameObject;
         Player = gameObject;
         PathNode = pointParent.GetComponentsInChildren<Transform>();
-        Debug.Log(PathNode);
+        //Debug.Log(PathNode);
         CheckNode();
     }
 

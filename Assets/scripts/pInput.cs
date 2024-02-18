@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 public class pInput : MonoBehaviour
 {
     public TextMeshProUGUI prompt;
-    public TextMeshProUGUI stopwatch;
+    private TextMeshProUGUI stopwatch;
     public Stopwatch timer = new Stopwatch();
 
     public PlayerInputActions playerControls;
@@ -29,6 +29,7 @@ public class pInput : MonoBehaviour
 
     public GameObject camera;
     public GameObject[] PathNode;
+    //public GameObject pointParent;
     public GameObject Player;
     public float MoveSpeed;
     float Timer;
@@ -40,12 +41,14 @@ public class pInput : MonoBehaviour
     // Use this for initialization
     private void Awake()
     {
+        stopwatch = GameObject.FindWithTag("time").GetComponent<TextMeshProUGUI>();
         playerControls = new PlayerInputActions();
     }
     void Start()
     {
-        timer.Start();
+        //PathNode = pointParent.GetComponentsInChildren<Transform>();
         //PathNode = GetComponentInChildren<>();
+        timer.Start();
         CheckNode();
     }
 
@@ -91,13 +94,11 @@ public class pInput : MonoBehaviour
 
     void Update()
     {
-        
-
         TimeSpan t = timer.Elapsed;
         string elapsedTime = String.Format("{0:00}:{1:00}", t.Minutes, t.Seconds);
         stopwatch.text = elapsedTime;
         camera.transform.position = new Vector3(Player.transform.position.x, Player.transform.position.y, -10f);
-        Timer += Time.deltaTime * MoveSpeed;
+        Timer = Time.deltaTime * MoveSpeed;
 
         if (Player.transform.position != CurrentPositionHolder)
         {
