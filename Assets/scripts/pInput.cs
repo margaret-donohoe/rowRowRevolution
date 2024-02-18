@@ -16,9 +16,9 @@ public class pInput : MonoBehaviour
     private InputAction move;
     private Vector2 movement;
 
-    public float r1 = 2f;
-    public float r2 = 3f;
-    public float r3 = 4f;
+    public float r1 = 2;
+    public float r2 = 3;
+    public float r3 = 4;
 
     public Sprite upE;
     public Sprite downE;
@@ -117,12 +117,11 @@ public class pInput : MonoBehaviour
 
     public float PlayerHit(string dir)
     {
-        //prompt.text = dir;
+        prompt.text = dir;
         
-        float score = 0;
+        float score = new float();
         currentArrow = PathNode[CurrentNode].GetComponentInChildren<SpriteRenderer>();
         float distance = Vector3.Distance(currentArrow.transform.position, Player.transform.position);
-        print(distance);
 
         if (currentArrow.sprite.name == "arrow_upF")
         {
@@ -140,12 +139,15 @@ public class pInput : MonoBehaviour
                 {
                     score = 0.33f;
                 }
-                
+                else
+                {
+                    score = 0;
+                }
             }
             currentArrow.sprite = upE;
         }
 
-        if (currentArrow.sprite.name == "arrow_rightF")
+        else if (currentArrow.sprite.name == "arrow_rightF")
         {
             if (dir == "right")
             {
@@ -161,12 +163,15 @@ public class pInput : MonoBehaviour
                 {
                     score = 0.33f;
                 }
-                
+                else
+                {
+                    score = 0;
+                }
             }
             currentArrow.sprite = rightE;
         }
 
-        if (currentArrow.sprite.name == "arrow_downF")
+        else if (currentArrow.sprite.name == "arrow_downF")
         {
             if (dir == "down")
             {
@@ -182,12 +187,15 @@ public class pInput : MonoBehaviour
                 {
                     score = 0.33f;
                 }
-                
+                else
+                {
+                    score = 0;
+                }
             }
             currentArrow.sprite = downE;
         }
 
-        if (currentArrow.sprite.name == "arrow_leftF")
+        else if (currentArrow.sprite.name == "arrow_leftF")
         {
             if (dir == "left")
             {
@@ -203,28 +211,38 @@ public class pInput : MonoBehaviour
                 {
                     score = 0.33f;
                 }
-               
+                else
+                {
+                    score = 0;
+                }
             }
             currentArrow.sprite = leftE;
         }
+        else
+        {
+            score = 0;
+        }
 
-        
-        if (score == 0.33f)
+        if (score != null)
         {
-            prompt.text = "OKAY";
-        }
-        else if (score == 0.67f)
-        {
-            prompt.text = "GOOD";
-        }
-        else if (score == 1)
-        {
-            prompt.text = "PERFECT";
-        }
-        else if (score == 0)
-        {
-            prompt.text = "FAIL";
+            if (score == 0.33f)
+            {
+                //prompt.text = "OKAY";
+            }
+            else if (score == 0.67f)
+            {
+                //prompt.text = "GOOD";
+            }
+            else if (score == 1)
+            {
+                //prompt.text = "PERFECT";
+            }
+            else if (score == 0)
+            {
+                //prompt.text = "FAIL";
+            }
         }
         return score;
     }
+        
 }
