@@ -98,7 +98,7 @@ public class pInput : MonoBehaviour
         string elapsedTime = String.Format("{0:00}:{1:00}", t.Minutes, t.Seconds);
         stopwatch.text = elapsedTime;
         camera.transform.position = new Vector3(Player.transform.position.x, Player.transform.position.y, -10f);
-        Timer = Time.deltaTime * MoveSpeed;
+        Timer += Time.deltaTime * MoveSpeed;
 
         if (Player.transform.position != CurrentPositionHolder)
         {
