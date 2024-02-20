@@ -7,6 +7,7 @@ TagManager:
   - KEEP
   - point
   - time
+  - Arrow
   layers:
   - Default
   - TransparentFX

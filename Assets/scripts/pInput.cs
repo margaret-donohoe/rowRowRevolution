@@ -28,6 +28,7 @@ public class pInput : MonoBehaviour
     SpriteRenderer currentArrow;
 
     public GameObject camera;
+    private GameObject arrowNear;
     public GameObject[] PathNode;
     //public GameObject pointParent;
     public GameObject Player;
@@ -116,12 +117,21 @@ public class pInput : MonoBehaviour
         }
     }
 
-    public float PlayerHit(string dir)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        prompt.text = dir;
+        if (collision.gameObject.tag == "Arrow")
+        {
+            arrowNear = collision.gameObject;
+        }
+    }
+
+
+            public float PlayerHit(string dir)
+    {
+        //prompt.text = dir;
         
         float score = new float();
-        currentArrow = PathNode[CurrentNode].GetComponentInChildren<SpriteRenderer>();
+        currentArrow = arrowNear.GetComponent<SpriteRenderer>();
         float distance = Vector3.Distance(currentArrow.transform.position, Player.transform.position);
 
         if (currentArrow.sprite.name == "arrow_upF")
@@ -144,8 +154,8 @@ public class pInput : MonoBehaviour
                 {
                     score = 0;
                 }
+                currentArrow.sprite = upE;
             }
-            currentArrow.sprite = upE;
         }
 
         else if (currentArrow.sprite.name == "arrow_rightF")
@@ -168,8 +178,8 @@ public class pInput : MonoBehaviour
                 {
                     score = 0;
                 }
+                currentArrow.sprite = rightE;
             }
-            currentArrow.sprite = rightE;
         }
 
         else if (currentArrow.sprite.name == "arrow_downF")
@@ -192,8 +202,8 @@ public class pInput : MonoBehaviour
                 {
                     score = 0;
                 }
+                currentArrow.sprite = downE;
             }
-            currentArrow.sprite = downE;
         }
 
         else if (currentArrow.sprite.name == "arrow_leftF")
@@ -216,31 +226,31 @@ public class pInput : MonoBehaviour
                 {
                     score = 0;
                 }
+                currentArrow.sprite = leftE;
             }
-            currentArrow.sprite = leftE;
         }
         else
         {
-            score = 0;
+            //score = 0;
         }
 
         if (score != null)
         {
             if (score == 0.33f)
             {
-                //prompt.text = "OKAY";
+                prompt.text = "OKAY";
             }
             else if (score == 0.67f)
             {
-                //prompt.text = "GOOD";
+                prompt.text = "GOOD";
             }
             else if (score == 1)
             {
-                //prompt.text = "PERFECT";
+                prompt.text = "PERFECT";
             }
             else if (score == 0)
             {
-                //prompt.text = "FAIL";
+                prompt.text = "FAIL";
             }
         }
         return score;
