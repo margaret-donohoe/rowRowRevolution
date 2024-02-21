@@ -5,6 +5,7 @@ using TMPro;
 using System;
 using System.Diagnostics;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class pInput : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class pInput : MonoBehaviour
     public PlayerInputActions playerControls;
     private InputAction move;
     private Vector2 movement;
+    private string tempTime;
 
     public float r1 = 2;
     public float r2 = 3;
@@ -122,6 +124,11 @@ public class pInput : MonoBehaviour
         if (collision.gameObject.tag == "Arrow")
         {
             arrowNear = collision.gameObject;
+        }
+        if (collision.gameObject.tag == "End")
+        {
+            tempTime = stopwatch.text;
+            StartCoroutine(FinishGame());
         }
     }
 
@@ -255,5 +262,11 @@ public class pInput : MonoBehaviour
         }
         return score;
     }
-        
+
+    IEnumerator FinishGame()
+    {
+        PlayerPrefs.SetString("p1time", tempTime);
+        yield return new WaitForSeconds(6);
+        SceneManager.LoadScene("OneEnd");
+    }
 }

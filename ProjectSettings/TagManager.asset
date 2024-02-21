@@ -8,6 +8,7 @@ TagManager:
   - point
   - time
   - Arrow
+  - End
   layers:
   - Default
   - TransparentFX
