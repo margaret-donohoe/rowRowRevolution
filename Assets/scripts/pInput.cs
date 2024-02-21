@@ -18,9 +18,15 @@ public class pInput : MonoBehaviour
     private Vector2 movement;
     private string tempTime;
 
-    public float r1 = 2;
+    private musicManage music;
+
+    public float r1 = 1.5f;
     public float r2 = 3;
-    public float r3 = 4;
+    public float r3 = 5;
+
+    private float totalScore;
+    private float tScore;
+    private int numScores;
 
     public Sprite upE;
     public Sprite downE;
@@ -45,6 +51,7 @@ public class pInput : MonoBehaviour
     private void Awake()
     {
         stopwatch = GameObject.FindWithTag("time").GetComponent<TextMeshProUGUI>();
+        music = gameObject.GetComponent<musicManage>();
         playerControls = new PlayerInputActions();
     }
     void Start()
@@ -79,20 +86,23 @@ public class pInput : MonoBehaviour
         movement = move.ReadValue<Vector2>();
         if (movement.x > 0f)
         {
-            PlayerHit("right");
+            tScore = PlayerHit("right");
         }
         else if (movement.x < 0f)
         {
-            PlayerHit("left");
+            tScore = PlayerHit("left");
         }
         else if (movement.y > 0f)
         {
-            PlayerHit("up");
+            tScore = PlayerHit("up");
         }
         else if (movement.y < 0f)
         {
-            PlayerHit("down");
+           tScore = PlayerHit("down");
         }
+
+        totalScore += tScore;
+        numScores++;
     }
 
     void Update()
@@ -110,6 +120,7 @@ public class pInput : MonoBehaviour
         }
         else
         {
+            music.CheckTime();
 
             if (CurrentNode < PathNode.Length - 1)
             {
@@ -133,7 +144,7 @@ public class pInput : MonoBehaviour
     }
 
 
-            public float PlayerHit(string dir)
+public float PlayerHit(string dir)
     {
         //prompt.text = dir;
         
@@ -268,5 +279,23 @@ public class pInput : MonoBehaviour
         PlayerPrefs.SetString("p1time", tempTime);
         yield return new WaitForSeconds(6);
         SceneManager.LoadScene("OneEnd");
+    }
+
+    public int GetNodeIndex()
+    {
+        return CurrentNode;
+    }
+
+    public float GetAverage()
+    {
+        float avg = totalScore / (float)numScores;
+        print(avg);
+        return avg;
+    }
+
+    public void ZeroScore()
+    {
+        totalScore = 0;
+        numScores = 0;
     }
 }
