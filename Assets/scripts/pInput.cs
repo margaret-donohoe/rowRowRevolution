@@ -135,6 +135,11 @@ public class pInput : MonoBehaviour
         if (collision.gameObject.tag == "Arrow")
         {
             arrowNear = collision.gameObject;
+
+            if(numScores == 0)
+            {
+                tScore = 0.5f;
+            }
         }
         if (collision.gameObject.tag == "End")
         {
