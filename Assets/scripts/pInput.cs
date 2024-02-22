@@ -298,4 +298,9 @@ public float PlayerHit(string dir)
         totalScore = 0;
         numScores = 0;
     }
+
+    public void SetSpeed(float p)
+    {
+        MoveSpeed = p;
+    }
 }
