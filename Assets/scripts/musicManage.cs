@@ -38,57 +38,32 @@ public class musicManage : MonoBehaviour
     public void CheckTime()
     {
         int i = Player.GetNodeIndex();
-        //float j = i / 4 * 4;
+        print(i);
         bool changed = false;
 
-        float prevTime = pAudio.time;
-        float timeRatio = prevTime / pAudio.clip.length;
+        float current = pAudio.pitch;
 
-        if(i % 4 == 0)
+        if (i % 4 == 0)
         {
             float score = Player.GetAverage();
 
             if(score >= 0.75) // high score, music speeds up
             {
-                float current = pAudio.pitch;
+                
                 pAudio.pitch = current - 0.1f;
+                Player.SetSpeed(pAudio.pitch);
             }
 
             else if(score <= 0.25) // low score, music slows down
             {
-                if (pAudio.clip == minusTwo)
-                {
-                    pAudio.clip = minusThree;
-                    changed = true;
-                }
-                else if (pAudio.clip == minusOne && changed == false)
-                {
-                    pAudio.clip = minusTwo;
-                    changed = true;
-                }
-                else if (pAudio.clip == center && changed == false)
-                {
-                    pAudio.clip = minusOne;
-                    changed = true;
-                }
-                if (pAudio.clip == plusOne && changed == false)
-                {
-                    pAudio.clip = center;
-                    changed = true;
-                }
-                else if (pAudio.clip == plusTwo && changed == false)
-                {
-                    pAudio.clip = plusOne;
-                    changed = true;
-                }
-                else if (pAudio.clip == plusThree && changed == false)
-                {
-                    pAudio.clip = plusTwo;
-                    changed = true;
-                }
+                pAudio.pitch = current + 0.1f;
+                Player.SetSpeed(pAudio.pitch);
+            }
+            else
+            {
+                Player.SetSpeed(pAudio.pitch);
             }
 
-            pAudio.time = timeRatio / pAudio.clip.length; //sets time of clip based on time of previous clip
         }
 
         Player.ZeroScore();
