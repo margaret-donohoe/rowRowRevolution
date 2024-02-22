@@ -50,36 +50,8 @@ public class musicManage : MonoBehaviour
 
             if(score >= 0.75) // high score, music speeds up
             {
-                if (pAudio.clip == minusThree)
-                {
-                    pAudio.clip = minusTwo;
-                    changed = true;
-                }
-                else if (pAudio.clip == minusTwo && changed == false)
-                {
-                    pAudio.clip = minusOne;
-                    changed = true;
-                }
-                else if (pAudio.clip ==  minusOne && changed == false)
-                {
-                    pAudio.clip = center;
-                    changed = true;
-                }
-                else if (pAudio.clip == center && changed == false)
-                {
-                    pAudio.clip = plusOne;
-                    changed = true;
-                }
-                if (pAudio.clip == plusOne && changed == false)
-                {
-                    pAudio.clip = plusTwo;
-                    changed = true;
-                }
-                else if (pAudio.clip == plusTwo && changed == false)
-                {
-                    pAudio.clip = plusThree;
-                    changed = true;
-                }
+                float current = pAudio.pitch;
+                pAudio.pitch = current - 0.1f;
             }
 
             else if(score <= 0.25) // low score, music slows down
