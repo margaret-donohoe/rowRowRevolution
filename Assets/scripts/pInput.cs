@@ -301,6 +301,6 @@ public float PlayerHit(string dir)
 
     public void SetSpeed(float p)
     {
-        MoveSpeed = p;
+        MoveSpeed = p * MoveSpeed;
     }
 }
