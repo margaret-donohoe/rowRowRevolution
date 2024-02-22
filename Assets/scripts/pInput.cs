@@ -84,29 +84,36 @@ public class pInput : MonoBehaviour
     private void FixedUpdate()
     {
         movement = move.ReadValue<Vector2>();
-        if (movement.x > 0f)
+        if(movement.x > 0 || movement.y > 0)
         {
-            tScore = PlayerHit("right");
-        }
-        else if (movement.x < 0f)
-        {
-            tScore = PlayerHit("left");
-        }
-        else if (movement.y > 0f)
-        {
-            tScore = PlayerHit("up");
-        }
-        else if (movement.y < 0f)
-        {
-           tScore = PlayerHit("down");
+            if (movement.x > 0f)
+            {
+                tScore = PlayerHit("right");
+            }
+            else if (movement.x < 0f)
+            {
+                tScore = PlayerHit("left");
+            }
+            else if (movement.y > 0f)
+            {
+                tScore = PlayerHit("up");
+            }
+            else if (movement.y < 0f)
+            {
+                tScore = PlayerHit("down");
+            }
+
+            totalScore += tScore;
+            numScores++;
         }
 
-        totalScore += tScore;
-        numScores++;
     }
 
     void Update()
     {
+        
+
+
         TimeSpan t = timer.Elapsed;
         string elapsedTime = String.Format("{0:00}:{1:00}", t.Minutes, t.Seconds);
         stopwatch.text = elapsedTime;
@@ -138,7 +145,8 @@ public class pInput : MonoBehaviour
 
             if(numScores == 0)
             {
-                tScore = 0.5f;
+                totalScore = 0.5f;
+                numScores++;
             }
         }
         if (collision.gameObject.tag == "End")
@@ -293,7 +301,7 @@ public float PlayerHit(string dir)
 
     public float GetAverage()
     {
-        float avg = totalScore / (float)numScores;
+        float avg = totalScore / numScores;
         print(avg);
         return avg;
     }

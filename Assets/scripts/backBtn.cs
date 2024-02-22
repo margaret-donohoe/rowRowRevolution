@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class backBtn : MonoBehaviour
 {
     public Button back;
+
+    public AudioSource click;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,12 +23,13 @@ public class backBtn : MonoBehaviour
 
     void GoHome()
     {
+        click.Play();
         StartCoroutine(WaitASec());
     }
 
     IEnumerator WaitASec()
     {
-        yield return new WaitForSeconds(0.02f);
+        yield return new WaitForSeconds(0.4f);
         SceneManager.LoadScene("Open");
     }
 }

@@ -60,6 +60,7 @@ public class musicManage : MonoBehaviour
             }
             else
             {
+                pAudio.pitch = pAudio.pitch;
                 Player.SetSpeed(pAudio.pitch);
             }
 
