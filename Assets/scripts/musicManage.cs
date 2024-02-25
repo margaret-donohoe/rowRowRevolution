@@ -28,7 +28,7 @@ public class musicManage : MonoBehaviour
         //center = pAudio.clip;
         Player = gameObject.GetComponent<pInput>();
         pAudio = gameObject.GetComponent<AudioSource>();
-
+        pAudio.pitch = 1;
         double initTime = AudioSettings.dspTime;
         pAudio.PlayScheduled(initTime + startDelay);
         if (OnAudioStart != null)
