@@ -1,38 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SynchronizerData;
+
 
 public class musicManage : MonoBehaviour
 {
     private AudioSource pAudio;
     private pInput Player;
-
-    public AudioClip minusThree;
-    public AudioClip minusTwo;
-    public AudioClip minusOne;
     private AudioClip center;
-    public AudioClip plusOne;
-    public AudioClip plusTwo;
-    public AudioClip plusThree;
 
-    // Start is called before the first frame update
+    public float bpm = 120f; // Tempo in beats per minute of the audio clip.
+    public float startDelay = 1; // Number of seconds to delay the start of audio playback.
+    public delegate void AudioStartAction(double syncTime);
+    public static event AudioStartAction OnAudioStart;
+
+    public BeatValue beatValue = BeatValue.QuarterBeat;
+    public int beatScalar = 1;
+    public BeatValue beatOffset = BeatValue.None;
+    public bool negativeBeatOffset = false;
+    public BeatType beatType = BeatType.OnBeat;
+    //float initTime;
+
     void Start()
     {
         //SET AUDIO CLIPS BASED ON BOAT TYPE HERE
-
-
-
+        //center = pAudio.clip;
         Player = gameObject.GetComponent<pInput>();
         pAudio = gameObject.GetComponent<AudioSource>();
-        center = pAudio.clip;
 
-        pAudio.Play();
+        double initTime = AudioSettings.dspTime;
+        pAudio.PlayScheduled(initTime + startDelay);
+        if (OnAudioStart != null)
+        {
+            OnAudioStart(initTime + startDelay);
+        }
+        //StartCoroutine(StartAudio());
+        //pAudio.Play();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void CheckTime()
@@ -46,14 +56,14 @@ public class musicManage : MonoBehaviour
         {
             float score = Player.GetAverage();
 
-            if(score >= 0.75) // high score, music speeds up
+            if (score >= 0.75) // high score, music speeds up
             {
-                
+
                 pAudio.pitch = current + 0.1f;
                 Player.SetSpeed(pAudio.pitch);
             }
 
-            else if(score <= 0.25) // low score, music slows down
+            else if (score <= 0.25) // low score, music slows down
             {
                 pAudio.pitch = current - 0.1f;
                 Player.SetSpeed(pAudio.pitch);
@@ -67,5 +77,22 @@ public class musicManage : MonoBehaviour
         }
 
         Player.ZeroScore();
+    }
+
+    IEnumerator StartAudio()//NOT BEING USED!
+    {
+        yield return new WaitForSeconds(startDelay);
+
+        pAudio.Play();
+
+        if (OnAudioStart != null)
+        {
+            OnAudioStart(startDelay);
+        }
+    }
+
+    public float GetBPM()
+    {
+        return bpm;
     }
 }

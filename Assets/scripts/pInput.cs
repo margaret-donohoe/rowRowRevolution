@@ -46,10 +46,12 @@ public class pInput : MonoBehaviour
     int CurrentNode;
     private Vector2 startPosition;
 
-
+    private pInput player;
+    
     // Use this for initialization
     private void Awake()
     {
+        player = gameObject.GetComponent<pInput>();
         stopwatch = GameObject.FindWithTag("time").GetComponent<TextMeshProUGUI>();
         music = gameObject.GetComponent<musicManage>();
         playerControls = new PlayerInputActions();
@@ -59,6 +61,7 @@ public class pInput : MonoBehaviour
         //PathNode = pointParent.GetComponentsInChildren<Transform>();
         //PathNode = GetComponentInChildren<>();
         timer.Start();
+        //StartCoroutine(BeginMove());
         CheckNode();
     }
 
@@ -111,9 +114,6 @@ public class pInput : MonoBehaviour
 
     void Update()
     {
-        
-
-
         TimeSpan t = timer.Elapsed;
         string elapsedTime = String.Format("{0:00}:{1:00}", t.Minutes, t.Seconds);
         stopwatch.text = elapsedTime;
@@ -315,5 +315,12 @@ public float PlayerHit(string dir)
     public void SetSpeed(float p)
     {
         MoveSpeed = p * MoveSpeed;
+    }
+
+
+    IEnumerator BeginMove()
+    {
+        yield return new WaitForSeconds(1);
+        CheckNode();
     }
 }
