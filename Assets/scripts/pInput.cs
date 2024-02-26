@@ -20,9 +20,11 @@ public class pInput : MonoBehaviour
 
     private musicManage music;
 
-    public float r1 = 1.5f;
-    public float r2 = 3;
-    public float r3 = 5;
+    public float r1 = 0.25f;
+    public float r2 = 0.75f;
+    public float r3 = 1;
+
+    bool alreadyHit;
 
     private float totalScore;
     private float tScore;
@@ -86,34 +88,6 @@ public class pInput : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        movement = move.ReadValue<Vector2>();
-        if(movement.x > 0 || movement.y > 0)
-        {
-            if (movement.x > 0f)
-            {
-                tScore = PlayerHit("right");
-            }
-            else if (movement.x < 0f)
-            {
-                tScore = PlayerHit("left");
-            }
-            else if (movement.y > 0f)
-            {
-                tScore = PlayerHit("up");
-            }
-            else if (movement.y < 0f)
-            {
-                tScore = PlayerHit("down");
-            }
-
-            totalScore += tScore;
-            numScores++;
-        }
-
-    }
-
-    void Update()
-    {
         TimeSpan t = timer.Elapsed;
         string elapsedTime = String.Format("{0:00}:{1:00}", t.Minutes, t.Seconds);
         stopwatch.text = elapsedTime;
@@ -137,17 +111,43 @@ public class pInput : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        movement = move.ReadValue<Vector2>();
+
+
+        if (movement.x > 0 || movement.y > 0 && alreadyHit == false)
+        {
+            alreadyHit = true;
+            if (movement.x > 0f)
+            {
+                tScore = PlayerHit("right");
+            }
+            else if (movement.x < 0f)
+            {
+                tScore = PlayerHit("left");
+            }
+            else if (movement.y > 0f)
+            {
+                tScore = PlayerHit("up");
+            }
+            else if (movement.y < 0f)
+            {
+                tScore = PlayerHit("down");
+            }
+
+            totalScore += tScore;
+            numScores++;
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Arrow")
         {
             arrowNear = collision.gameObject;
+            currentArrow = arrowNear.GetComponent<SpriteRenderer>();
 
-            if(numScores == 0)
-            {
-                totalScore = 0.5f;
-                numScores++;
-            }
         }
         if (collision.gameObject.tag == "End")
         {
@@ -162,9 +162,9 @@ public float PlayerHit(string dir)
         //prompt.text = dir;
         
         float score = new float();
-        currentArrow = arrowNear.GetComponent<SpriteRenderer>();
+        
         float distance = Vector3.Distance(currentArrow.transform.position, Player.transform.position);
-
+        print(distance);
         if (currentArrow.sprite.name == "arrow_upF")
         {
             if(dir == "up")
@@ -267,24 +267,34 @@ public float PlayerHit(string dir)
 
         if (score != null)
         {
-            if (score == 0.33f)
-            {
-                prompt.text = "OKAY";
-            }
-            else if (score == 0.67f)
-            {
-                prompt.text = "GOOD";
-            }
-            else if (score == 1)
-            {
-                prompt.text = "PERFECT";
-            }
-            else if (score == 0)
-            {
-                prompt.text = "FAIL";
-            }
+            StartCoroutine(TellPlayer(score));
+            
         }
+        
         return score;
+    }
+
+    IEnumerator TellPlayer(float s)
+    {
+        if (s == 0.33f)
+        {
+            prompt.text = "OKAY";
+        }
+        else if (s == 0.67f)
+        {
+            prompt.text = "GOOD";
+        }
+        else if (s == 1)
+        {
+            prompt.text = "PERFECT";
+        }
+        else if (s == 0)
+        {
+            prompt.text = "FAIL";
+        }
+
+        yield return new WaitForSeconds (4f);
+        alreadyHit = false;
     }
 
     IEnumerator FinishGame()
@@ -302,7 +312,6 @@ public float PlayerHit(string dir)
     public float GetAverage()
     {
         float avg = totalScore / numScores;
-        print(avg);
         return avg;
     }
 
@@ -317,10 +326,4 @@ public float PlayerHit(string dir)
         MoveSpeed = p * MoveSpeed;
     }
 
-
-    IEnumerator BeginMove()
-    {
-        yield return new WaitForSeconds(1);
-        CheckNode();
-    }
 }

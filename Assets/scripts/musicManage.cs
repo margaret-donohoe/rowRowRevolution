@@ -30,11 +30,7 @@ public class musicManage : MonoBehaviour
         pAudio = gameObject.GetComponent<AudioSource>();
         pAudio.pitch = 1;
         double initTime = AudioSettings.dspTime;
-        pAudio.PlayScheduled(initTime + startDelay);
-        if (OnAudioStart != null)
-        {
-            OnAudioStart(initTime + startDelay);
-        }
+        pAudio.Play();
         //StartCoroutine(StartAudio());
         //pAudio.Play();
     }
@@ -49,7 +45,6 @@ public class musicManage : MonoBehaviour
     {
         int i = Player.GetNodeIndex();
         bool check = (i % 4 == 0);
-        print(check);
         float current = pAudio.pitch;
 
         if (i > 4 && i % 4 == 0) // NOT WORKING
@@ -59,37 +54,26 @@ public class musicManage : MonoBehaviour
             if (score >= 0.75) // high score, music speeds up
             {
 
-                pAudio.pitch = current + 0.1f;
+                //pAudio.pitch = current + 0.1f;
                 Player.SetSpeed(pAudio.pitch);
             }
 
             else if (score <= 0.25) // low score, music slows down
             {
-                pAudio.pitch = current - 0.1f;
+                //pAudio.pitch = current - 0.1f;
                 Player.SetSpeed(pAudio.pitch);
             }
             else
             {
-                pAudio.pitch = pAudio.pitch;
+                //pAudio.pitch = pAudio.pitch;
                 Player.SetSpeed(pAudio.pitch);
             }
 
         }
 
-        Player.ZeroScore();
+        //Player.ZeroScore();
     }
 
-    IEnumerator StartAudio()//NOT BEING USED!
-    {
-        yield return new WaitForSeconds(startDelay);
-
-        pAudio.Play();
-
-        if (OnAudioStart != null)
-        {
-            OnAudioStart(startDelay);
-        }
-    }
 
     public float GetBPM()
     {
