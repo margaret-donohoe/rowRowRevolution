@@ -29,7 +29,7 @@ public class pInput : MonoBehaviour
     private float totalScore;
     private float tScore;
     private int numScores;
-
+    private string scoreTxt;
     public Sprite upE;
     public Sprite downE;
     public Sprite rightE;
@@ -116,9 +116,10 @@ public class pInput : MonoBehaviour
         movement = move.ReadValue<Vector2>();
 
 
-        if (movement.x > 0 || movement.y > 0 && alreadyHit == false)
+        if (movement.x != 0 || movement.y != 0 && alreadyHit == false)
         {
             alreadyHit = true;
+
             if (movement.x > 0f)
             {
                 tScore = PlayerHit("right");
@@ -146,6 +147,7 @@ public class pInput : MonoBehaviour
         if (collision.gameObject.tag == "Arrow")
         {
             arrowNear = collision.gameObject;
+
             currentArrow = arrowNear.GetComponent<SpriteRenderer>();
 
         }
@@ -163,99 +165,100 @@ public float PlayerHit(string dir)
         
         float score = new float();
         
-        float distance = Vector3.Distance(currentArrow.transform.position, Player.transform.position);
+        float distance = Vector2.Distance(currentArrow.transform.position, Player.transform.position);
         print(distance);
+
+
         if (currentArrow.sprite.name == "arrow_upF")
         {
             if(dir == "up")
             {
                 if (distance < r1)
                 {
-                    score = 1;
+                    scoreTxt = "perfect";
                 }
                 else if (distance < r2)
                 {
-                    score = 0.67f;
+                    scoreTxt = "good";
                 }
                 else if (distance < r3)
                 {
-                    score = 0.33f;
+                    scoreTxt = "fine";
                 }
                 else
                 {
-                    score = 0;
+                    scoreTxt = "fail";
                 }
                 currentArrow.sprite = upE;
             }
         }
-
         else if (currentArrow.sprite.name == "arrow_rightF")
         {
             if (dir == "right")
             {
                 if (distance < r1)
                 {
-                    score = 1;
+                    scoreTxt = "perfect";
                 }
                 else if (distance < r2)
                 {
-                    score = 0.67f;
+                    scoreTxt = "good";
                 }
                 else if (distance < r3)
                 {
-                    score = 0.33f;
+                    scoreTxt = "fine";
                 }
                 else
                 {
-                    score = 0;
+                    scoreTxt = "fail";
                 }
                 currentArrow.sprite = rightE;
             }
         }
-
         else if (currentArrow.sprite.name == "arrow_downF")
         {
             if (dir == "down")
             {
                 if (distance < r1)
                 {
-                    score = 1;
+                    scoreTxt = "perfect";
                 }
                 else if (distance < r2)
                 {
-                    score = 0.67f;
+                    scoreTxt = "good";
                 }
                 else if (distance < r3)
                 {
-                    score = 0.33f;
+                    scoreTxt = "fine";
                 }
                 else
                 {
-                    score = 0;
+                    scoreTxt = "fail";
                 }
                 currentArrow.sprite = downE;
             }
         }
-
         else if (currentArrow.sprite.name == "arrow_leftF")
         {
+            print("left!");
             if (dir == "left")
             {
+                print("reads!");
                 if (distance < r1)
                 {
-                    score = 1;
+                    scoreTxt = "perfect";
                 }
                 else if (distance < r2)
                 {
-                    score = 0.67f;
+                    scoreTxt = "good";
                 }
                 else if (distance < r3)
                 {
-                    score = 0.33f;
+                    scoreTxt = "fine";
                 }
                 else
                 {
-                    score = 0;
+                    scoreTxt = "fail";
                 }
                 currentArrow.sprite = leftE;
             }
@@ -267,28 +270,28 @@ public float PlayerHit(string dir)
 
         if (score != null)
         {
-            StartCoroutine(TellPlayer(score));
+            StartCoroutine(TellPlayer(scoreTxt));
             
         }
         
         return score;
     }
 
-    IEnumerator TellPlayer(float s)
+    IEnumerator TellPlayer(string s)
     {
-        if (s == 0.33f)
+        if (s == "okay")
         {
             prompt.text = "OKAY";
         }
-        else if (s == 0.67f)
+        else if (s == "good")
         {
             prompt.text = "GOOD";
         }
-        else if (s == 1)
+        else if (s == "perfect")
         {
             prompt.text = "PERFECT";
         }
-        else if (s == 0)
+        else if (s == "fail")
         {
             prompt.text = "FAIL";
         }
