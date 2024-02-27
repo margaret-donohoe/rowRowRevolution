@@ -28,6 +28,10 @@ public class pInput : MonoBehaviour
     public GameObject placeMarker;
 
     private musicManage music;
+    public AudioSource musicSource;
+    public AudioClip fancyMusic;
+    public AudioClip orchestraMusic;
+    public AudioClip toyMusic;
 
     private string boatType;
     //public GameObject boatObject;
