@@ -94,15 +94,15 @@ public class pInput : MonoBehaviour
 
     void assignMusicBoat() {
         if (boatType == "fancy"){
-            
+            this.GetCOmponent<SpriteRenderer>().sprite = fancyBoat;
         }
 
          if (boatType == "orchestra"){
-
+            this.GetCOmponent<SpriteRenderer>().sprite = orchestraBoat;
         }
 
          if (boatType == "toy"){
-
+            this.GetCOmponent<SpriteRenderer>().sprite = toyBoat;
         }
     }
     
@@ -351,7 +351,7 @@ public float PlayerHit(string dir)
     IEnumerator FinishGame()
     {
         PlayerPrefs.SetString("p1time", tempTime);
-        yield return new WaitForSeconds(6);
+        yield return new WaitForSeconds(1.5f);
         SceneManager.LoadScene("OneEnd");
     }
 
