@@ -28,6 +28,8 @@ public class chooseOneP : MonoBehaviour
         boat3.onClick.AddListener(SetThree);
         boat4.onClick.AddListener(SetFour);
         back.onClick.AddListener(Back);
+
+        
     }
 
     // Update is called once per frame
@@ -49,16 +51,19 @@ public class chooseOneP : MonoBehaviour
     void SetOne()
     {
         swish.Play();
+        PlayerPrefs.SetString("music", "fancy");
     }
 
     void SetTwo()
     {
         swish.Play();
+        PlayerPrefs.SetString("music", "orchestra");
     }
 
     void SetThree()
     {
         swish.Play();
+        PlayerPrefs.SetString("music", "toy");
     }
 
     void SetFour()
