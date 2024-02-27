@@ -45,12 +45,6 @@ public class pInput : MonoBehaviour
     public Sprite downE;
     public Sprite rightE;
     public Sprite leftE;
-   
-    private string boatType;
-    //public GameObject boatObject;
-    public Sprite fancyBoat;
-    public Sprite orchestraBoat;
-    public Sprite toyBoat;
 
     SpriteRenderer currentArrow;
 
@@ -80,8 +74,6 @@ public class pInput : MonoBehaviour
         music = gameObject.GetComponent<musicManage>();
         playerControls = new PlayerInputActions();
     }
-    
-    
     void Start()
     {
         //PathNode = pointParent.GetComponentsInChildren<Transform>();
@@ -89,9 +81,9 @@ public class pInput : MonoBehaviour
         timer.Start();
         //StartCoroutine(BeginMove());
         CheckNode();
-        boatType = PlayerPrefs.GetString("music");
     }
 
+<<<<<<< HEAD
     void assignMusicBoat() {
         if (boatType == "fancy"){
             
@@ -107,6 +99,8 @@ public class pInput : MonoBehaviour
     }
     
 
+=======
+>>>>>>> main
     void CheckNode()
     {
         Timer = 0;
