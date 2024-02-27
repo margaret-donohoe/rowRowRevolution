@@ -77,7 +77,7 @@ public class pInput : MonoBehaviour
         lineLength = lineEnd.transform.position.x - lineStart.transform.position.x; // LENGTH OF MINIMAP LINE
         player = gameObject.GetComponent<pInput>();
         stopwatch = GameObject.FindWithTag("time").GetComponent<TextMeshProUGUI>();
-        music = gameObject.GetComponent<musicManage>();
+        //music = gameObject.GetComponent<musicManage>();
         playerControls = new PlayerInputActions();
     }
     void Start()
@@ -98,6 +98,7 @@ public class pInput : MonoBehaviour
         boatType = PlayerPrefs.GetString("music");
         print(boatType);
         assignMusicBoat();
+        music = gameObject.GetComponent<musicManage>();
     }
 
     void assignMusicBoat() {
