@@ -49,16 +49,19 @@ public class chooseOneP : MonoBehaviour
     void SetOne()
     {
         swish.Play();
+        PlayerPrefs.SetString("music", "fancy");
     }
 
     void SetTwo()
     {
         swish.Play();
+        PlayerPrefs.SetString("music", "orchestra");
     }
 
     void SetThree()
     {
         swish.Play();
+        PlayerPrefs.SetString("music", "toy");
     }
 
     void SetFour()
