@@ -29,7 +29,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/choose2b.unity
     guid: 17b1e60f2052743e49eb0a12b1248402
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/LEVELTWO.unity
     guid: 3757a583e3fa144c790489c6e9187f35
+  - enabled: 1
+    path: Assets/Scenes/levelHELL.unity
+    guid: 69b7269aba6c04557b3692bdb9246f55
   m_configObjects: {}
