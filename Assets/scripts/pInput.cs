@@ -18,6 +18,15 @@ public class pInput : MonoBehaviour
     private Vector2 movement;
     private string tempTime;
 
+    public GameObject lineStart;
+    public GameObject lineEnd;
+    private float distanceToEnd;
+    private float totalDistance;
+    private float startxPos;
+    private float lineLength;
+    public GameObject finishLinePoint;
+    public GameObject placeMarker;
+
     private musicManage music;
 
     public float r1 = 0.25f;
@@ -53,6 +62,11 @@ public class pInput : MonoBehaviour
     // Use this for initialization
     private void Awake()
     {
+        startxPos = placeMarker.transform.position.x;
+        placeMarker.transform.position = lineStart.transform.position;
+        distanceToEnd = Vector2.Distance(finishLinePoint.transform.position, Player.transform.position);
+        totalDistance = distanceToEnd;
+        lineLength = lineEnd.transform.position.x - lineStart.transform.position.x; // LENGTH OF MINIMAP LINE
         player = gameObject.GetComponent<pInput>();
         stopwatch = GameObject.FindWithTag("time").GetComponent<TextMeshProUGUI>();
         music = gameObject.GetComponent<musicManage>();
@@ -88,6 +102,12 @@ public class pInput : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
+        if(Vector2.Distance(finishLinePoint.transform.position, Player.transform.position) < distanceToEnd)
+        {
+            distanceToEnd = Vector2.Distance(finishLinePoint.transform.position, Player.transform.position);
+            MoveMarker();
+        }
+
         TimeSpan t = timer.Elapsed;
         string elapsedTime = String.Format("{0:00}:{1:00}", t.Minutes, t.Seconds);
         stopwatch.text = elapsedTime;
@@ -329,4 +349,14 @@ public float PlayerHit(string dir)
         MoveSpeed = p * MoveSpeed;
     }
 
+    public void MoveMarker()
+    {
+        float previousPos = placeMarker.transform.position.x;
+        float trackAmtDone = (totalDistance - distanceToEnd) / totalDistance;
+        print(trackAmtDone);
+        float lineAmtDone = trackAmtDone * lineLength;
+        float newXpos = startxPos + lineAmtDone;
+        placeMarker.transform.position = new Vector2(newXpos, placeMarker.transform.position.y);
+        //SET YPOS BASED ON RATIO OF POSITION FROM END OFTRACK TO POSITION FROM END OF MINIMAP LINE
+    }
 }
