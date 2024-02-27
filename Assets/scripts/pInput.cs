@@ -29,6 +29,12 @@ public class pInput : MonoBehaviour
 
     private musicManage music;
 
+    private string boatType;
+    //public GameObject boatObject;
+    public Sprite fancyBoat;
+    public Sprite orchestraBoat;
+    public Sprite toyBoat;  
+
     public float r1 = 0.25f;
     public float r2 = 0.75f;
     public float r3 = 1;
@@ -81,7 +87,37 @@ public class pInput : MonoBehaviour
         timer.Start();
         //StartCoroutine(BeginMove());
         CheckNode();
+        /*
+        if (PlayerPrefs.GetString("music")!= null) {
+            boatType = PlayerPrefs.GetString("music");
+        }
+        else () {
+            boatType = "fancy";
+        }
+        */
+        boatType = PlayerPrefs.GetString("music");
+        print(boatType);
+        assignMusicBoat();
     }
+
+    void assignMusicBoat() {
+        if (boatType == "fancy") {
+            print("boat is fancy");
+            gameObject.GetComponent<SpriteRenderer>().sprite = fancyBoat;
+        }
+
+        if (boatType == "orchestra") {
+            gameObject.GetComponent<SpriteRenderer>().sprite = orchestraBoat;
+        }
+
+        if (boatType == "toy") {
+            gameObject.GetComponent<SpriteRenderer>().sprite = toyBoat;
+        }
+
+    }
+
+
+
 
     void CheckNode()
     {
@@ -327,7 +363,7 @@ public float PlayerHit(string dir)
     IEnumerator FinishGame()
     {
         PlayerPrefs.SetString("p1time", tempTime);
-        yield return new WaitForSeconds(6);
+        yield return new WaitForSeconds(1.5f);
         SceneManager.LoadScene("OneEnd");
     }
 
