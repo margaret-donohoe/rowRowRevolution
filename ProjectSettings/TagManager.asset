@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - KEEP
+  - point
+  - time
+  - Arrow
+  - End
   layers:
   - Default
   - TransparentFX

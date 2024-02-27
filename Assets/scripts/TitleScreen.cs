@@ -10,7 +10,8 @@ public class TitleScreen : MonoBehaviour
     public Button one;
     public Button two;
     public TextMeshProUGUI prompt;
-    
+
+    public AudioSource click;
 
     private int numPlayers = 0;
 
@@ -25,17 +26,23 @@ public class TitleScreen : MonoBehaviour
     }
     public void Help() 
     {
-        SceneManager.LoadScene("instructions"); //scene explaining how the game works
+        click.Play();
+        StartCoroutine(inst());
     }
     public void Begin()
-    { 
-        if(numPlayers == 1)
+    {
+        click.Play();
+        if (numPlayers == 1)
         {
-            SceneManager.LoadScene("choose1"); //scene where one player can choose their boat
+            click.Play();
+            
+            StartCoroutine(chz1());
         }
         else if (numPlayers == 2)
         {
-            SceneManager.LoadScene("choose2"); //scene where two players can choose their boats
+            click.Play();
+            
+            StartCoroutine(chz2());
         }
         else
         {
@@ -46,10 +53,12 @@ public class TitleScreen : MonoBehaviour
     public void ch1()
     {
         numPlayers = 1;
+        click.Play();
     }
     public void ch2()
     {
         numPlayers = 2;
+        click.Play();
     }
 
     IEnumerator FadeOut()
@@ -60,5 +69,23 @@ public class TitleScreen : MonoBehaviour
             prompt.alpha -= 0.1f;
             yield return new WaitForSeconds(0.05f);
         }
+    }
+
+    IEnumerator inst()
+    {
+        yield return new WaitForSeconds(0.4f);
+        SceneManager.LoadScene("instructions"); //scene explaining how the game works
+    }
+
+    IEnumerator chz1()
+    {
+        yield return new WaitForSeconds(0.4f);
+        SceneManager.LoadScene("choose1"); //scene explaining how the game works
+    }
+
+    IEnumerator chz2()
+    {
+        yield return new WaitForSeconds(0.4f);
+        SceneManager.LoadScene("choose2a"); //scene explaining how the game works
     }
 }
