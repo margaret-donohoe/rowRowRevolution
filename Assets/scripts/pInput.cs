@@ -45,6 +45,8 @@ public class pInput : MonoBehaviour
     public Sprite downE;
     public Sprite rightE;
     public Sprite leftE;
+   
+    private string boatType;
 
     SpriteRenderer currentArrow;
 
@@ -74,6 +76,8 @@ public class pInput : MonoBehaviour
         music = gameObject.GetComponent<musicManage>();
         playerControls = new PlayerInputActions();
     }
+    
+    
     void Start()
     {
         //PathNode = pointParent.GetComponentsInChildren<Transform>();
@@ -81,6 +85,7 @@ public class pInput : MonoBehaviour
         timer.Start();
         //StartCoroutine(BeginMove());
         CheckNode();
+         boatType = PlayerPrefs.GetString("music");
     }
 
     void CheckNode()
