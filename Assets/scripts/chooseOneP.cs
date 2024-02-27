@@ -12,10 +12,10 @@ public class chooseOneP : MonoBehaviour
     public AudioSource click;
     public AudioSource swish;
 
-    public Button boat1;
-    public Button boat2;
-    public Button boat3;
-    public Button boat4;
+    public Button boatFancy;
+    public Button boatOrchestra;
+    public Button boatToy;
+
 
     public Button back;
     // Start is called before the first frame update
@@ -23,10 +23,10 @@ public class chooseOneP : MonoBehaviour
     {
         music = GameObject.FindGameObjectsWithTag("KEEP");
         setBtn.onClick.AddListener(Set);
-        boat1.onClick.AddListener(SetOne);
-        boat2.onClick.AddListener(SetTwo);
-        boat3.onClick.AddListener(SetThree);
-        boat4.onClick.AddListener(SetFour);
+        boatFancy.onClick.AddListener(SetFancy);
+        boatOrchestra.onClick.AddListener(SetOrchestra);
+        boatToy.onClick.AddListener(SetToy);
+  
         back.onClick.AddListener(Back);
     }
 
@@ -46,25 +46,24 @@ public class chooseOneP : MonoBehaviour
         StartCoroutine(BeginGame());
     }
 
-    void SetOne()
+    void SetFancy()
     {
         swish.Play();
+        PlayerPrefs.SetString("music", "fancy");
     }
 
-    void SetTwo()
+    void SetOrchestra()
     {
         swish.Play();
+        PlayerPrefs.SetString("music", "orchestra");
     }
 
-    void SetThree()
+    void SetToy()
     {
         swish.Play();
+        PlayerPrefs.SetString("music", "toy");
     }
 
-    void SetFour()
-    {
-        swish.Play();
-    }
 
     IEnumerator BeginGame()
     {
