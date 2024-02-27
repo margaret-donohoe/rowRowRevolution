@@ -47,6 +47,10 @@ public class pInput : MonoBehaviour
     public Sprite leftE;
    
     private string boatType;
+    //public GameObject boatObject;
+    public Sprite fancyBoat;
+    public Sprite orchestraBoat;
+    public Sprite toyBoat;
 
     SpriteRenderer currentArrow;
 
@@ -85,8 +89,23 @@ public class pInput : MonoBehaviour
         timer.Start();
         //StartCoroutine(BeginMove());
         CheckNode();
-         boatType = PlayerPrefs.GetString("music");
+        boatType = PlayerPrefs.GetString("music");
     }
+
+    void assignMusicBoat() {
+        if (boatType == "fancy"){
+            
+        }
+
+         if (boatType == "orchestra"){
+
+        }
+
+         if (boatType == "toy"){
+
+        }
+    }
+    
 
     void CheckNode()
     {

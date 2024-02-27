@@ -28,6 +28,8 @@ public class chooseOneP : MonoBehaviour
         boat3.onClick.AddListener(SetThree);
         boat4.onClick.AddListener(SetFour);
         back.onClick.AddListener(Back);
+
+        
     }
 
     // Update is called once per frame
