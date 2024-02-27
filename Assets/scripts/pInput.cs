@@ -81,7 +81,7 @@ public class pInput : MonoBehaviour
         lineLength = lineEnd.transform.position.x - lineStart.transform.position.x; // LENGTH OF MINIMAP LINE
         player = gameObject.GetComponent<pInput>();
         stopwatch = GameObject.FindWithTag("time").GetComponent<TextMeshProUGUI>();
-        //music = gameObject.GetComponent<musicManage>();
+        
         playerControls = new PlayerInputActions();
     }
     void Start()
@@ -109,14 +109,20 @@ public class pInput : MonoBehaviour
         if (boatType == "fancy") {
             print("boat is fancy");
             gameObject.GetComponent<SpriteRenderer>().sprite = fancyBoat;
+            musicSource.clip = fancyMusic;
+            musicSource.Play();
         }
 
         if (boatType == "orchestra") {
             gameObject.GetComponent<SpriteRenderer>().sprite = orchestraBoat;
+            musicSource.clip = orchestraMusic;
+            musicSource.Play();
         }
 
         if (boatType == "toy") {
             gameObject.GetComponent<SpriteRenderer>().sprite = toyBoat;
+            musicSource.clip = toyMusic;
+            musicSource.Play();
         }
 
     }

@@ -30,7 +30,7 @@ public class ManageFinish1 : MonoBehaviour
 
     public void LevelTwo()
     {
-        SceneManager.LoadScene("levelTwo1p");
+        SceneManager.LoadScene("levelHELL");
     }
 
     public void Home()
