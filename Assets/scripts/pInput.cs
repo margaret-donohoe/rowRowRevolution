@@ -35,6 +35,8 @@ public class pInput : MonoBehaviour
 
     bool alreadyHit;
 
+    public ParticleSystem perfectHit;
+
     private float totalScore;
     private float tScore;
     private int numScores;
@@ -135,31 +137,34 @@ public class pInput : MonoBehaviour
     {
         movement = move.ReadValue<Vector2>();
 
-
-        if (movement.x != 0 || movement.y != 0 && alreadyHit == false)
+        if(currentArrow != null)
         {
-            alreadyHit = true;
+            if (movement.x != 0 || movement.y != 0 && alreadyHit == false)
+            {
+                alreadyHit = true;
 
-            if (movement.x > 0f)
-            {
-                tScore = PlayerHit("right");
-            }
-            else if (movement.x < 0f)
-            {
-                tScore = PlayerHit("left");
-            }
-            else if (movement.y > 0f)
-            {
-                tScore = PlayerHit("up");
-            }
-            else if (movement.y < 0f)
-            {
-                tScore = PlayerHit("down");
-            }
+                if (movement.x > 0f)
+                {
+                    tScore = PlayerHit("right");
+                }
+                else if (movement.x < 0f)
+                {
+                    tScore = PlayerHit("left");
+                }
+                else if (movement.y > 0f)
+                {
+                    tScore = PlayerHit("up");
+                }
+                else if (movement.y < 0f)
+                {
+                    tScore = PlayerHit("down");
+                }
 
-            totalScore += tScore;
-            numScores++;
+                totalScore += tScore;
+                numScores++;
+            }
         }
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -186,7 +191,6 @@ public float PlayerHit(string dir)
         float score = new float();
         
         float distance = Vector2.Distance(currentArrow.transform.position, Player.transform.position);
-        print(distance);
 
 
         if (currentArrow.sprite.name == "arrow_upF")
@@ -260,10 +264,8 @@ public float PlayerHit(string dir)
         }
         else if (currentArrow.sprite.name == "arrow_leftF")
         {
-            print("left!");
             if (dir == "left")
             {
-                print("reads!");
                 if (distance < r1)
                 {
                     scoreTxt = "perfect";
@@ -309,6 +311,8 @@ public float PlayerHit(string dir)
         }
         else if (s == "perfect")
         {
+            perfectHit.transform.position = new Vector2(Player.transform.position.x, player.transform.position.y);
+            perfectHit.Play();
             prompt.text = "PERFECT";
         }
         else if (s == "fail")
@@ -353,7 +357,6 @@ public float PlayerHit(string dir)
     {
         float previousPos = placeMarker.transform.position.x;
         float trackAmtDone = (totalDistance - distanceToEnd) / totalDistance;
-        print(trackAmtDone);
         float lineAmtDone = trackAmtDone * lineLength;
         float newXpos = startxPos + lineAmtDone;
         placeMarker.transform.position = new Vector2(newXpos, placeMarker.transform.position.y);
