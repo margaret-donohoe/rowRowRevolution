@@ -11,14 +11,17 @@ public class twoPlayerManager : MonoBehaviour
 {
     public TextMeshProUGUI stopwatch;
     public Stopwatch timer = new Stopwatch();
-    public Transform[] PathNode;
 
     public GameObject camera1;
     public GameObject camera2;
 
     public GameObject startPoint;
-    public GameObject playerPrefab;
+    public GameObject player1Prefab;
+    public GameObject player2Prefab;
     public int numberOfPlayers = 2;
+
+    private pInput2a playerOne;
+    private pInput2b playerTwo;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,17 +29,17 @@ public class twoPlayerManager : MonoBehaviour
         //var gamepads = Gamepad.all;
         if (numberOfPlayers == 2)
         {
-            var player1 = PlayerInput.Instantiate(playerPrefab, controlScheme: "Arrows", pairWithDevice: Keyboard.current); ;
-            print(player1.user);
+            var player1 = PlayerInput.Instantiate(player1Prefab, controlScheme: "Arrows", pairWithDevice: Keyboard.current); ;
             player1.transform.position = startPoint.transform.position;
-            player1.gameObject.GetComponent<PInput2>().SetCamera(camera1);
-
-
-            var player2 = PlayerInput.Instantiate(playerPrefab, controlScheme: "WASD", pairWithDevice: Keyboard.current);
-            print(player1.user);
+            //player1.gameObject.GetComponent<PInput2>().SetCamera(camera1);
+            player1.gameObject.GetComponent<AudioSource>().panStereo = 0.0f;
+            playerOne = player1.gameObject.GetComponent<pInput2a>();
+            var player2 = PlayerInput.Instantiate(player2Prefab, controlScheme: "WASD", pairWithDevice: Keyboard.current);
             player2.transform.position = startPoint.transform.position;
-            player2.gameObject.GetComponent<PInput2>().SetCamera(camera2);
+            //player2.gameObject.GetComponent<PInput2>().SetCamera(camera2);
             player2.gameObject.GetComponent<AudioSource>().panStereo = 1.0f;
+            playerTwo = player2.gameObject.GetComponent<pInput2b>();
+            //camera1.GetComponent<Camera>().rect = new Rect();
         }
         else
         {
@@ -53,8 +56,9 @@ public class twoPlayerManager : MonoBehaviour
 
     }
 
-    public Transform[] GetArray()
+    void FixedUpdate()
     {
-        return PathNode;
+        camera1.transform.position = new Vector3(playerOne.transform.position.x, playerOne.transform.position.y, -10f);
+        camera2.transform.position = new Vector3(playerTwo.transform.position.x, playerTwo.transform.position.y, -10f);
     }
 }

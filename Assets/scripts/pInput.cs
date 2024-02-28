@@ -107,7 +107,6 @@ public class pInput : MonoBehaviour
 
     void assignMusicBoat() {
         if (boatType == "fancy") {
-            print("boat is fancy");
             gameObject.GetComponent<SpriteRenderer>().sprite = fancyBoat;
             musicSource.clip = fancyMusic;
             musicSource.Play();
@@ -225,6 +224,7 @@ public class pInput : MonoBehaviour
         }
         if (collision.gameObject.tag == "End")
         {
+            timer.Stop();
             tempTime = stopwatch.text;
             StartCoroutine(FinishGame());
         }
@@ -374,7 +374,7 @@ public float PlayerHit(string dir)
     IEnumerator FinishGame()
     {
         PlayerPrefs.SetString("p1time", tempTime);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
         SceneManager.LoadScene("OneEnd");
     }
 
