@@ -57,7 +57,6 @@ public class pInput2a : MonoBehaviour
 
     SpriteRenderer currentArrow;
 
-    public GameObject camera;
     private GameObject arrowNear;
     public GameObject[] PathNode;
     //public GameObject pointParent;
