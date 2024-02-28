@@ -313,7 +313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   back: {fileID: 1161599453}
-  click: {fileID: 0}
+  click: {fileID: 1769850611}
 --- !u!1 &625767347
 GameObject:
   m_ObjectHideFlags: 0
@@ -1294,7 +1294,7 @@ MonoBehaviour:
   boat2: {fileID: 1232245477}
   boat3: {fileID: 1321168761}
   boat4: {fileID: 1273551862}
-  back: {fileID: 0}
+  back: {fileID: 1161599453}
 --- !u!82 &1769850611
 AudioSource:
   m_ObjectHideFlags: 0
