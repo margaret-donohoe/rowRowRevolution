@@ -65,7 +65,7 @@ public class chooseTwoB : MonoBehaviour
     IEnumerator BeginGame()
     {
         yield return new WaitForSeconds(0.4f);
-        SceneManager.LoadScene("TWOPLAYERHUD");
+        SceneManager.LoadScene("TWOPLAYER");
     }
 
     public void Back()

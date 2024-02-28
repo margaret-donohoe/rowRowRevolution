@@ -18,7 +18,7 @@ public class twoPlayerManager : MonoBehaviour
     public GameObject startPoint;
     public GameObject player1Prefab;
     public GameObject player2Prefab;
-    public int numberOfPlayers = 2;
+    private int numberOfPlayers = 2;
 
     private pInput2a playerOne;
     private pInput2b playerTwo;
@@ -40,10 +40,6 @@ public class twoPlayerManager : MonoBehaviour
             player2.gameObject.GetComponent<AudioSource>().panStereo = 1.0f;
             playerTwo = player2.gameObject.GetComponent<pInput2b>();
             //camera1.GetComponent<Camera>().rect = new Rect();
-        }
-        else
-        {
-            //print("Please connect a Controller!!!");
         }
     }
 
