@@ -68,17 +68,18 @@ public class pInput2a : MonoBehaviour
     int CurrentNode;
     private Vector2 startPosition;
 
-    private pInput player;
+    private pInput2a player;
     
     // Use this for initialization
     private void Awake()
     {
+        PlayerPrefs.SetInt("theyAlreadyWon", 0);
         startxPos = placeMarker.transform.position.x;
         placeMarker.transform.position = lineStart.transform.position;
         distanceToEnd = Vector2.Distance(finishLinePoint.transform.position, Player.transform.position);
         totalDistance = distanceToEnd;
         lineLength = lineEnd.transform.position.x - lineStart.transform.position.x; // LENGTH OF MINIMAP LINE
-        player = gameObject.GetComponent<pInput>();
+        player = gameObject.GetComponent<pInput2a>();
         stopwatch = GameObject.FindWithTag("time").GetComponent<TextMeshProUGUI>();
         
         playerControls = new PlayerInputActions();
@@ -217,8 +218,17 @@ public class pInput2a : MonoBehaviour
         }
         if (collision.gameObject.tag == "End")
         {
-            tempTime = stopwatch.text;
-            StartCoroutine(FinishGame());
+            if(PlayerPrefs.GetInt("theyAlreadyWon") == 1)
+            {
+                tempTime = stopwatch.text;
+                StartCoroutine(FinishGame());
+                PlayerPrefs.SetInt("winner", 2);
+            }
+            else
+            {
+                PlayerPrefs.SetInt("theyAlreadyWon", 1);
+                PlayerPrefs.SetInt("winner", 1);
+            }
         }
     }
 
@@ -367,7 +377,7 @@ public float PlayerHit(string dir)
     {
         PlayerPrefs.SetString("p1time", tempTime);
         yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene("OneEnd");
+        SceneManager.LoadScene("twoEnd");
     }
 
     public int GetNodeIndex()

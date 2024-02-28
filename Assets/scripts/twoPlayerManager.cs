@@ -16,6 +16,7 @@ public class twoPlayerManager : MonoBehaviour
     public GameObject camera2;
 
     public GameObject startPoint;
+    public GameObject startPoint2;
     public GameObject player1Prefab;
     public GameObject player2Prefab;
     private int numberOfPlayers = 2;
@@ -35,7 +36,7 @@ public class twoPlayerManager : MonoBehaviour
             player1.gameObject.GetComponent<AudioSource>().panStereo = 0.0f;
             playerOne = player1.gameObject.GetComponent<pInput2a>();
             var player2 = PlayerInput.Instantiate(player2Prefab, controlScheme: "WASD", pairWithDevice: Keyboard.current);
-            player2.transform.position = startPoint.transform.position;
+            player2.transform.position = startPoint2.transform.position;
             //player2.gameObject.GetComponent<PInput2>().SetCamera(camera2);
             player2.gameObject.GetComponent<AudioSource>().panStereo = 1.0f;
             playerTwo = player2.gameObject.GetComponent<pInput2b>();

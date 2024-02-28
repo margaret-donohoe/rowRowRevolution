@@ -68,7 +68,7 @@ public class pInput2b : MonoBehaviour
     int CurrentNode;
     private Vector2 startPosition;
 
-    private pInput player;
+    private pInput2b player;
     
     // Use this for initialization
     private void Awake()
@@ -78,7 +78,7 @@ public class pInput2b : MonoBehaviour
         distanceToEnd = Vector2.Distance(finishLinePoint.transform.position, Player.transform.position);
         totalDistance = distanceToEnd;
         lineLength = lineEnd.transform.position.x - lineStart.transform.position.x; // LENGTH OF MINIMAP LINE
-        player = gameObject.GetComponent<pInput>();
+        player = gameObject.GetComponent<pInput2b>();
         stopwatch = GameObject.FindWithTag("time").GetComponent<TextMeshProUGUI>();
         
         playerControls = new PlayerInputActions();
@@ -218,8 +218,15 @@ public class pInput2b : MonoBehaviour
         }
         if (collision.gameObject.tag == "End")
         {
-            tempTime = stopwatch.text;
-            StartCoroutine(FinishGame());
+            if (PlayerPrefs.GetInt("theyAlreadyWon") == 1)
+            {
+                tempTime = stopwatch.text;
+                StartCoroutine(FinishGame());
+            }
+            else
+            {
+                PlayerPrefs.SetInt("theyAlreadyWon", 1);
+            }
         }
     }
 
@@ -366,9 +373,9 @@ public float PlayerHit(string dir)
 
     IEnumerator FinishGame()
     {
-        PlayerPrefs.SetString("p1time", tempTime);
+        PlayerPrefs.SetString("p2time", tempTime);
         yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene("OneEnd");
+        SceneManager.LoadScene("twoEnd");
     }
 
     public int GetNodeIndex()
