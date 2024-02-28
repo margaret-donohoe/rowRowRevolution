@@ -21,6 +21,9 @@ public class twoPlayerManager : MonoBehaviour
     public GameObject player2Prefab;
     private int numberOfPlayers = 2;
 
+    public GameObject original1;
+    public GameObject original2;
+
     private pInput2a playerOne;
     private pInput2b playerTwo;
     // Start is called before the first frame update
@@ -33,6 +36,7 @@ public class twoPlayerManager : MonoBehaviour
             var player1 = PlayerInput.Instantiate(player1Prefab, controlScheme: "Arrows", pairWithDevice: Keyboard.current); ;
             //player1.transform.position = startPoint.transform.position;
             //player1.gameObject.GetComponent<PInput2>().SetCamera(camera1);
+            Destroy(original1);
             player1.gameObject.GetComponent<AudioSource>().panStereo = 0.0f;
             playerOne = player1.gameObject.GetComponent<pInput2a>();
             playerOne.gameObject.transform.position = startPoint.transform.position;
@@ -41,6 +45,7 @@ public class twoPlayerManager : MonoBehaviour
             var player2 = PlayerInput.Instantiate(player2Prefab, controlScheme: "WASD", pairWithDevice: Keyboard.current);
             //player2.transform.position = startPoint2.transform.position;
             //player2.gameObject.GetComponent<PInput2>().SetCamera(camera2);
+            Destroy(original2);
             player2.gameObject.GetComponent<AudioSource>().panStereo = 1.0f;
             playerTwo = player2.gameObject.GetComponent<pInput2b>();
             //camera1.GetComponent<Camera>().rect = new Rect();
