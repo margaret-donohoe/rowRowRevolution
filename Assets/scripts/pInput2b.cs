@@ -72,6 +72,7 @@ public class pInput2b : MonoBehaviour
     private Vector2 startPosition;
 
     private pInput2b player;
+    private pInput2a otherPlayer;
     
     // Use this for initialization
     private void Awake()
@@ -85,6 +86,7 @@ public class pInput2b : MonoBehaviour
         stopwatch = GameObject.FindWithTag("time").GetComponent<TextMeshProUGUI>();
         
         playerControls = new PlayerInputActions();
+        otherPlayer = GameObject.FindWithTag("Player1").GetComponent<pInput2a>();
     }
     void Start()
     {
@@ -239,7 +241,7 @@ public class pInput2b : MonoBehaviour
             }
             else
             {
-                PlayerPrefs.SetInt("theyAlreadyWon", 1);
+                otherPlayer.SetFinishTime();
             }
         }
     }

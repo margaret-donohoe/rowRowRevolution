@@ -11,6 +11,7 @@ TagManager:
   - End
   - Arrow1
   - Arrow2
+  - Player1
   layers:
   - Default
   - TransparentFX

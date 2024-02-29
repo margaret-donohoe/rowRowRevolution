@@ -55,13 +55,13 @@ public class musicManage2b : MonoBehaviour
             {
 
                 //pAudio.pitch = current + 0.1f;
-                Player.SetSpeed(0.9f);
+                Player.SetSpeed(0.85f);
             }
 
             else if (score <= 0.25) // low score, music slows down
             {
                 //pAudio.pitch = current - 0.1f;
-                Player.SetSpeed(1.1f);
+                Player.SetSpeed(1.15f);
             }
             else
             {

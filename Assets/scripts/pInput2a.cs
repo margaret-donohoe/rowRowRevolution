@@ -36,9 +36,9 @@ public class pInput2a : MonoBehaviour
     //public GameObject boatObject;
     public Sprite fancyBoat;
     public Sprite orchestraBoat;
-    public Sprite toyBoat;  
-    
+    public Sprite toyBoat;
 
+    private bool finishTime = false;
     public Animator animator;
     private float old_ypos;
     private float new_ypos;
@@ -59,6 +59,8 @@ public class pInput2a : MonoBehaviour
     public Sprite downE;
     public Sprite rightE;
     public Sprite leftE;
+
+    private Rigidbody rb;
 
     SpriteRenderer currentArrow;
 
@@ -142,7 +144,7 @@ public class pInput2a : MonoBehaviour
 
     private void OnEnable() 
     {
-        move = playerControls.Player.Move;
+        move = playerControls.Player2.Move;
         move.Enable();
     }
 
@@ -233,7 +235,7 @@ public class pInput2a : MonoBehaviour
         }
         if (collision.gameObject.tag == "End")
         {
-            if(PlayerPrefs.GetInt("theyAlreadyWon") == 1)
+            if(PlayerPrefs.GetInt("theyAlreadyWon") == 1 && finishTime == true)
             {
                 tempTime = stopwatch.text;
                 StartCoroutine(FinishGame());
@@ -425,5 +427,9 @@ public float PlayerHit(string dir)
         float newXpos = startxPos + lineAmtDone;
         placeMarker.transform.position = new Vector2(newXpos, placeMarker.transform.position.y);
         //SET YPOS BASED ON RATIO OF POSITION FROM END OFTRACK TO POSITION FROM END OF MINIMAP LINE
+    }
+    public void SetFinishTime()
+    {
+        finishTime = true;
     }
 }
