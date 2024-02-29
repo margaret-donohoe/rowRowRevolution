@@ -38,6 +38,7 @@ public class pInput : MonoBehaviour
     public Sprite fancyBoat;
     public Sprite orchestraBoat;
     public Sprite toyBoat;  
+    public Animator animator;
 
     public float r1 = 0.25f;
     public float r2 = 0.75f;
@@ -108,12 +109,14 @@ public class pInput : MonoBehaviour
     void assignMusicBoat() {
         if (boatType == "fancy") {
             gameObject.GetComponent<SpriteRenderer>().sprite = fancyBoat;
+            animator.SetBool("boattypeFancy", true);
             musicSource.clip = fancyMusic;
             musicSource.Play();
         }
 
         if (boatType == "orchestra") {
             gameObject.GetComponent<SpriteRenderer>().sprite = orchestraBoat;
+            animator.SetBool("boattypeOrchestra", true);
             musicSource.clip = orchestraMusic;
             musicSource.Play();
         }
@@ -209,6 +212,16 @@ public class pInput : MonoBehaviour
                 totalScore += tScore;
                 numScores++;
             }
+        }
+
+
+        if(movement.y > 0) {
+            animator.SetBool("goingUp", true);
+            print("going up!");
+        }
+        else if(movement.y < 0) {
+            animator.SetBool("goingUp", false);
+            print("going down :c");
         }
         
     }
