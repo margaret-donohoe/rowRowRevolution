@@ -80,8 +80,8 @@ public class pInput2a : MonoBehaviour
         lineLength = lineEnd.transform.position.x - lineStart.transform.position.x; // LENGTH OF MINIMAP LINE
         player = gameObject.GetComponent<pInput2a>();
         stopwatch = GameObject.FindWithTag("time").GetComponent<TextMeshProUGUI>();
-        
-        playerControls = new PlayerInputActions();
+
+        playerControls = new PlayerInputActions(); //I THINK THIS IS THE PROBLEM
     }
     void Start()
     {
