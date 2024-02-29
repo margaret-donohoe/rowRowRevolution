@@ -39,8 +39,6 @@ public class pInput : MonoBehaviour
     public Sprite orchestraBoat;
     public Sprite toyBoat;  
     public Animator animator;
-    private float old_ypos;
-    private float new_ypos;
 
     public float r1 = 0.25f;
     public float r2 = 0.75f;
@@ -176,22 +174,10 @@ public class pInput : MonoBehaviour
         {
             music.CheckTime();
 
-            
-
             if (CurrentNode < PathNode.Length - 1)
             {
-                old_ypos = CurrentPositionHolder.y;
                 CurrentNode++;
                 CheckNode();
-                new_ypos = CurrentPositionHolder.y;
-                print(old_ypos);
-                print(new_ypos);
-                if (old_ypos > new_ypos) {
-                    animator.SetBool("goingUp", false);
-                }
-                else if (old_ypos < new_ypos) {
-                    animator.SetBool("goingUp", true);
-                }
             }
         }
     }
