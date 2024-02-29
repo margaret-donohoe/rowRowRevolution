@@ -9,6 +9,8 @@ TagManager:
   - time
   - Arrow
   - End
+  - Arrow1
+  - Arrow2
   layers:
   - Default
   - TransparentFX

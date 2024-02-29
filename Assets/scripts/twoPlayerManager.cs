@@ -39,6 +39,7 @@ public class twoPlayerManager : MonoBehaviour
             Destroy(original1);
             player1.gameObject.GetComponent<AudioSource>().panStereo = 0.0f;
             playerOne = player1.gameObject.GetComponent<pInput2a>();
+            playerOne.GetComponent<PlayerInput>().SwitchCurrentControlScheme("Arrows", Keyboard.current);
             playerOne.gameObject.transform.position = startPoint.transform.position;
             camera1.transform.position = new Vector3(playerOne.transform.position.x, playerOne.transform.position.y, -10f);
 
@@ -48,6 +49,7 @@ public class twoPlayerManager : MonoBehaviour
             Destroy(original2);
             player2.gameObject.GetComponent<AudioSource>().panStereo = 1.0f;
             playerTwo = player2.gameObject.GetComponent<pInput2b>();
+            playerTwo.GetComponent<PlayerInput>().SwitchCurrentControlScheme("WASD", Keyboard.current);
             //camera1.GetComponent<Camera>().rect = new Rect();
             playerTwo.gameObject.transform.position = startPoint2.transform.position;
             camera2.transform.position = new Vector3(playerTwo.transform.position.x, playerTwo.transform.position.y, -10f);

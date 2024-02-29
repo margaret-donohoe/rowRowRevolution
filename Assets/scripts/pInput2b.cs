@@ -208,7 +208,7 @@ public class pInput2b : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Arrow")
+        if (collision.gameObject.tag == "Arrow2")
         {
             arrowNear = collision.gameObject;
 
