@@ -34,6 +34,10 @@ public class pInput : MonoBehaviour
     public AudioClip toyMusic;
 
     private string boatType;
+    //public GameObject boatObject;
+    public Sprite fancyBoat;
+    public Sprite orchestraBoat;
+    public Sprite toyBoat;  
     public Animator animator;
     private float old_ypos;
     private float new_ypos;
@@ -90,7 +94,14 @@ public class pInput : MonoBehaviour
         timer.Start();
         //StartCoroutine(BeginMove());
         CheckNode();
-      
+        /*
+        if (PlayerPrefs.GetString("music")!= null) {
+            boatType = PlayerPrefs.GetString("music");
+        }
+        else () {
+            boatType = "fancy";
+        }
+        */
         boatType = PlayerPrefs.GetString("music");
         print(boatType);
         assignMusicBoat();
@@ -173,9 +184,8 @@ public class pInput : MonoBehaviour
                 CurrentNode++;
                 CheckNode();
                 new_ypos = CurrentPositionHolder.y;
-                //print(old_ypos);
-                //print(new_ypos);
-                
+                print(old_ypos);
+                print(new_ypos);
                 if (old_ypos > new_ypos) {
                     animator.SetBool("goingUp", false);
                 }
@@ -219,6 +229,14 @@ public class pInput : MonoBehaviour
         }
 
 
+        if(movement.y > 0) {
+            animator.SetBool("goingUp", true);
+            print("going up!");
+        }
+        else if(movement.y < 0) {
+            animator.SetBool("goingUp", false);
+            print("going down :c");
+        }
         
     }
 
