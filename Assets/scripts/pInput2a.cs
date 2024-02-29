@@ -37,6 +37,11 @@ public class pInput2a : MonoBehaviour
     public Sprite fancyBoat;
     public Sprite orchestraBoat;
     public Sprite toyBoat;  
+    
+
+    public Animator animator;
+    private float old_ypos;
+    private float new_ypos;
 
     public float r1 = 0.25f;
     public float r2 = 0.75f;
@@ -105,12 +110,14 @@ public class pInput2a : MonoBehaviour
     void assignMusicBoat() {
         if (boatType == "fancy") {
             gameObject.GetComponent<SpriteRenderer>().sprite = fancyBoat;
+            animator.SetBool("boattypeFancy", true);
             musicSource.clip = fancyMusic;
             musicSource.Play();
         }
 
         if (boatType == "orchestra") {
             gameObject.GetComponent<SpriteRenderer>().sprite = orchestraBoat;
+            animator.SetBool("boattypeOrchestra", true);
             musicSource.clip = orchestraMusic;
             musicSource.Play();
         }
@@ -166,8 +173,17 @@ public class pInput2a : MonoBehaviour
 
             if (CurrentNode < PathNode.Length - 1)
             {
+                old_ypos = CurrentPositionHolder.y;
                 CurrentNode++;
                 CheckNode();
+                new_ypos = CurrentPositionHolder.y;
+
+                if (old_ypos > new_ypos) {
+                    animator.SetBool("goingUp", false);
+                }
+                else if (old_ypos < new_ypos) {
+                    animator.SetBool("goingUp", true);
+                }
             }
         }
     }
