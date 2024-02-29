@@ -33,16 +33,14 @@ public class pInput2a : MonoBehaviour
     public AudioClip toyMusic;
 
     private string boatType;
-    //public GameObject boatObject;
-    public Sprite fancyBoat;
-    public Sprite orchestraBoat;
-    public Sprite toyBoat;  
+    public Animator animator; 
 
     public float r1 = 0.25f;
     public float r2 = 0.75f;
     public float r3 = 1;
 
     bool alreadyHit;
+
 
     public ParticleSystem perfectHit;
 
