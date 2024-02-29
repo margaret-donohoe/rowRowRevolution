@@ -36,7 +36,7 @@ public class twoPlayerManager : MonoBehaviour
             var player1 = PlayerInput.Instantiate(player1Prefab, controlScheme: "Arrows", pairWithDevice: Keyboard.current); ;
             //player1.transform.position = startPoint.transform.position;
             //player1.gameObject.GetComponent<PInput2>().SetCamera(camera1);
-            Destroy(original1);
+            DestroyImmediate(original1);
             player1.gameObject.GetComponent<AudioSource>().panStereo = 0.0f;
             playerOne = player1.gameObject.GetComponent<pInput2a>();
             playerOne.GetComponent<PlayerInput>().SwitchCurrentControlScheme("Arrows", Keyboard.current);
@@ -46,7 +46,7 @@ public class twoPlayerManager : MonoBehaviour
             var player2 = PlayerInput.Instantiate(player2Prefab, controlScheme: "WASD", pairWithDevice: Keyboard.current);
             //player2.transform.position = startPoint2.transform.position;
             //player2.gameObject.GetComponent<PInput2>().SetCamera(camera2);
-            Destroy(original2);
+            DestroyImmediate(original2);
             player2.gameObject.GetComponent<AudioSource>().panStereo = 1.0f;
             playerTwo = player2.gameObject.GetComponent<pInput2b>();
             playerTwo.GetComponent<PlayerInput>().SwitchCurrentControlScheme("WASD", Keyboard.current);
@@ -67,7 +67,7 @@ public class twoPlayerManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        camera1.transform.position = new Vector3(playerOne.transform.position.x, playerOne.transform.position.y, -10f);
-        camera2.transform.position = new Vector3(playerTwo.transform.position.x, playerTwo.transform.position.y, -10f);
+        camera1.transform.position = new Vector3(playerOne.transform.position.x, playerOne.transform.position.y, -5f);
+        camera2.transform.position = new Vector3(playerTwo.transform.position.x, playerTwo.transform.position.y, -5f);
     }
 }
